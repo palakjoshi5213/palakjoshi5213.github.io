@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://palakjoshi5213.github.io/sitemap.xml
+Sitemap: https://palakjoshi.com/sitemap.xml

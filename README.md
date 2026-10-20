@@ -69,6 +69,20 @@ grep -rl "palakjoshi5213.github.io" --include=*.html --include=*.xml --include=*
 - Each page has link-preview tags (`og:` and `twitter:`), so links pasted into LinkedIn, WhatsApp or email show a title, description and image. The default image is `assets/img/og-image.jpg`; project pages use their own lead image.
 - `index.html` and `about.html` carry structured data (JSON-LD) describing Ar. Palak Joshi for search engines. Update it if her role or firm changes.
 
+## Backing up the whole folder
+
+The public repository leaves out local-only files (original photos `IMG*.jpeg`, `.claude/`). A private repository, `palakjoshi5213/portfolio-backup`, holds a full snapshot of the folder. To refresh it, run this from Git Bash in this folder:
+
+```
+export GIT_INDEX_FILE="$(pwd)/.git/backup-index"; rm -f "$GIT_INDEX_FILE"
+git read-tree HEAD && git add -f -A . && TREE=$(git write-tree)
+unset GIT_INDEX_FILE; rm -f .git/backup-index
+C=$(git commit-tree "$TREE" -p HEAD -m "Backup snapshot $(date '+%Y-%m-%d %H:%M')")
+git push --force backup "$C:refs/heads/main"
+```
+
+The snapshot commit is never added to a local branch, so the private files cannot end up in the public repository by accident.
+
 ## Updating the CV
 
 Edit `_source/cv.html`, open it in a browser, print to PDF (A4, no margins, background graphics on), and save it over `assets/docs/Palak-Joshi-CV.pdf`.

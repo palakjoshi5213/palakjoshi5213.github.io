@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://palakjoshi5213.github.io/sitemap.xml

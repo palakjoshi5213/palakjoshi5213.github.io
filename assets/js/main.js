@@ -62,6 +62,11 @@
         var link = s.querySelector("a");
         if (link) link.tabIndex = i === index ? 0 : -1;
       });
+      // fetch the current and next images ahead of time so crossfades never wait on the network
+      [index, (index + 1) % slides.length].forEach(function (i) {
+        var im = slides[i].querySelector("img");
+        if (im) im.loading = "eager";
+      });
       var s = slides[index];
       if (caption) {
         caption.innerHTML = "";

@@ -9,7 +9,7 @@ index.html            Home (slideshow)
 work.html             Project index (list / grid, filters, hover previews)
 themes.html           Three themes with short essays
 documentation.html    Field documentation
-art.html              Sketches, paintings, models
+art.html              Atelier: drawings, paintings, studies and handmade models
 about.html            Profile, portrait, education, skills, contact (#contact)
 experience.html       Work experience and leadership
 awards.html           Awards, competitions, workshops, registration
@@ -57,6 +57,17 @@ Images are currently cropped from the PDF portfolio. To swap in originals, save 
 
    Remove any default "parking page" records Namecheap added.
 3. DNS can take up to a few hours. Then tick **Enforce HTTPS** in GitHub Pages settings.
+4. Point the site's own links at the new domain (canonical URLs, link previews, sitemap, structured data). From Git Bash in this folder, replacing the example domain:
+
+```
+grep -rl "palakjoshi5213.github.io" --include=*.html --include=*.xml --include=*.txt . | xargs sed -i "s#https://palakjoshi5213.github.io#https://palakjoshi.com#g"
+```
+
+## Search engines and link previews
+
+- `sitemap.xml` and `robots.txt` list the pages for Google. Add a new project page to `sitemap.xml` when you create one.
+- Each page has link-preview tags (`og:` and `twitter:`), so links pasted into LinkedIn, WhatsApp or email show a title, description and image. The default image is `assets/img/og-image.jpg`; project pages use their own lead image.
+- `index.html` and `about.html` carry structured data (JSON-LD) describing Ar. Palak Joshi for search engines. Update it if her role or firm changes.
 
 ## Updating the CV
 

@@ -115,10 +115,27 @@ hr, .rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
 }
 
-.brand { text-decoration: none; display: flex; align-items: baseline; gap: 14px; line-height: 1; }
+.brand { text-decoration: none; display: flex; align-items: center; gap: 16px; line-height: 1; }
 .brand:hover { color: var(--ink); }
-.brand__name { font-family: var(--serif); font-size: 26px; letter-spacing: .01em; }
-.brand__role { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.brand__mark {
+  position: relative; width: 46px; height: 46px; flex: none;
+  display: grid; place-items: center; padding-bottom: 4px;
+  border: 1px solid var(--ink);
+  font-family: var(--serif); font-size: 21px; font-weight: 500; letter-spacing: .06em;
+  transition: background .45s var(--ease), color .45s var(--ease);
+}
+.brand__mark::after {
+  content: ""; position: absolute; left: 50%; bottom: 8px; width: 18px; height: 1.5px;
+  background: var(--accent); transform: translateX(-50%); transition: width .45s var(--ease), background .45s;
+}
+.brand:hover .brand__mark, .brand:focus-visible .brand__mark { background: var(--ink); color: var(--paper); }
+.brand:hover .brand__mark::after, .brand:focus-visible .brand__mark::after { background: var(--accent-soft); width: 24px; }
+.brand__name {
+  font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); white-space: nowrap;
+  opacity: 0; transform: translateX(-8px); transition: opacity .45s var(--ease), transform .45s var(--ease);
+}
+.brand:hover .brand__name, .brand:focus-visible .brand__name { opacity: 1; transform: none; }
+@media (hover: none) { .brand__name { display: none; } }
 
 .nav { display: flex; gap: clamp(18px, 2.4vw, 36px); }
 .nav a {
@@ -143,7 +160,7 @@ hr, .rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
 @media (max-width: 900px) {
   /* backdrop-filter would make the header the containing block for the fixed menu */
   .site-header { -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--paper); }
-  .brand__role { display: none; }
+  .brand__name { display: none; }
   .nav-toggle { display: block; position: relative; z-index: 60; }
   .nav {
     position: fixed; inset: 0; z-index: 55;
@@ -461,11 +478,13 @@ blockquote.pull cite { display: block; margin-top: 14px; font-family: var(--sans
 
 /* ---------- Contact ---------- */
 
-.contact-big { font-family: var(--serif); font-size: clamp(30px, 5.4vw, 72px); line-height: 1.05; text-decoration: none; word-break: break-word; }
+#contact { scroll-margin-top: calc(var(--header-h) + 8px); }
+.contact-plain { font-size: 16px; color: var(--ink); }
 .contact-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
 .contact-list li { display: grid; grid-template-columns: 9em 1fr auto; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--rule); }
 .contact-list .eyebrow { margin: 0; }
-.contact-list a { font-family: var(--serif); font-size: clamp(20px, 2.2vw, 26px); text-decoration: none; }
+.contact-list a { font-size: 16px; text-decoration: none; color: var(--ink); font-variant-numeric: lining-nums; }
+.contact-list a:hover { color: var(--accent); }
 @media (max-width: 600px) { .contact-list li { grid-template-columns: 1fr auto; } .contact-list .eyebrow { grid-column: 1 / -1; } }
 .copy-btn { font: inherit; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; background: none; border: 0; color: var(--muted); cursor: pointer; padding: 6px 0; }
 .copy-btn:hover { color: var(--accent); }

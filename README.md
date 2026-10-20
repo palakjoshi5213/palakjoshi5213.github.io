@@ -10,10 +10,10 @@ work.html             Project index (list / grid, filters, hover previews)
 themes.html           Three themes with short essays
 documentation.html    Field documentation
 art.html              Sketches, paintings, models
-about.html            Profile, education, skills
+about.html            Profile, portrait, education, skills, contact (#contact)
 experience.html       Work experience and leadership
 awards.html           Awards, competitions, workshops, registration
-contact.html          Contact details
+contact.html          Redirects to about.html#contact (keeps old links working)
 404.html              Not-found page
 projects/*.html       One page per project
 assets/css/style.css  All styling (colours are the variables at the top)

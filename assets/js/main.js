@@ -313,6 +313,18 @@
     p.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
   });
 
+  /* ---------- Land on #section links from other pages (the browser doesn't always) ---------- */
+  if (window.location.hash.length > 1) {
+    var target = document.getElementById(window.location.hash.slice(1));
+    if (target) {
+      var jump = function () {
+        var top = target.getBoundingClientRect().top + window.pageYOffset - parseFloat(getComputedStyle(target).scrollMarginTop || 0);
+        window.scrollTo({ top: top, behavior: "instant" });
+      };
+      if (document.readyState === "complete") jump(); else window.addEventListener("load", jump);
+    }
+  }
+
   /* ---------- Footer year ---------- */
   $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

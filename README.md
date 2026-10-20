@@ -23,6 +23,14 @@ assets/docs/          Downloadable CV (PDF)
 _source/              Working files, not published (cv.html is the source of the CV PDF)
 ```
 
+## After editing the CSS or JavaScript
+
+Every page loads `style.css?v=…` and `main.js?v=…`. Change that number on all pages whenever either file changes, otherwise returning visitors may see the old styling for a while (GitHub Pages lets browsers cache files for 10 minutes). From Git Bash in this folder:
+
+```
+V=$(date +%Y%m%d%H%M); sed -i -E "s#(style\.css|main\.js)\?v=[0-9]+#\1?v=$V#g" *.html projects/*.html
+```
+
 ## Replacing images
 
 Images are currently cropped from the PDF portfolio. To swap in originals, save the new file over the old one with the **same name** (for example `assets/img/haven/hero.jpg`). Export JPGs at about 2000 px on the long side, quality 80 to 85, so pages stay fast. If the proportions change, update the `width` and `height` on that `<img>` tag.

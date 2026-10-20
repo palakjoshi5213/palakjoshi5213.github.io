@@ -306,6 +306,13 @@
     });
   }
 
+  /* ---------- About portrait: tap or Enter toggles colour (hover handles it on desktop) ---------- */
+  $$(".portrait").forEach(function (p) {
+    var flip = function () { p.classList.toggle("is-colour"); };
+    p.addEventListener("click", flip);
+    p.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flip(); } });
+  });
+
   /* ---------- Footer year ---------- */
   $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

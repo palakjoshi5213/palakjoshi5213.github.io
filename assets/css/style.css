@@ -437,6 +437,15 @@ blockquote.pull cite { display: block; margin-top: 14px; font-family: var(--sans
 .two-col { display: grid; gap: clamp(32px, 5vw, 80px); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 960px) { .two-col { grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr); } }
 
+.portrait {
+  position: relative; margin: 0 0 32px; aspect-ratio: 3 / 4; overflow: hidden;
+  background: var(--paper-deep); cursor: pointer; max-width: 420px;
+}
+.portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .9s var(--ease), transform 1.4s var(--ease); }
+.portrait__colour { opacity: 0; }
+.portrait:hover img, .portrait.is-colour img { transform: scale(1.02); }
+.portrait:hover .portrait__colour, .portrait:focus-visible .portrait__colour, .portrait.is-colour .portrait__colour { opacity: 1; }
+
 .skill-list { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
 .skill-list li { border: 1px solid var(--rule); padding: 6px 14px; font-size: 14px; border-radius: 999px; background: color-mix(in srgb, var(--paper-deep) 50%, transparent); }
 

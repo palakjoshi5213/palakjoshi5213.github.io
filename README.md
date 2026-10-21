@@ -20,8 +20,7 @@ projects/*.html       One page per project
 assets/css/style.css  All styling (colours are the variables at the top)
 assets/js/main.js     Slideshow, filters, lightbox, mobile menu
 assets/img/<project>/ Images, one folder per project
-_source/              Working files, not published (cv.html is the source of the CV PDF)
-_private/             Local only, ignored by git (CV PDF); included in the private backup
+_private/             Local only, ignored by git (CV source and PDF); in the private backup
 ```
 
 ## After editing the CSS or JavaScript
@@ -86,4 +85,4 @@ The snapshot commit is never added to a local branch, so the private files canno
 
 ## The CV (private)
 
-The CV is deliberately not on the website. Its source is `_source/cv.html`; the PDF lives in `_private/Palak-Joshi-CV.pdf`, which git ignores, so it never reaches the public repository (it is included in the private backup). To update it, edit `_source/cv.html`, open it in a browser, print to PDF (A4, no margins, background graphics on) and save it over `_private/Palak-Joshi-CV.pdf`. Send it directly to people who ask for it.
+The CV is deliberately not on the website. Its source is `_private/cv.html`; the PDF lives in `_private/Palak-Joshi-CV.pdf`, which git ignores, so it never reaches the public repository (it is included in the private backup). To update it, edit `_private/cv.html`, open it in a browser, print to PDF (A4, no margins, background graphics on) and save it over `_private/Palak-Joshi-CV.pdf`. Send it directly to people who ask for it.

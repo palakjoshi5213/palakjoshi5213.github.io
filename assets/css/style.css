@@ -1,6 +1,6 @@
 /* ==========================================================================
    Palak Joshi — Architecture portfolio
-   Kota stone palette. Serif headings (Cormorant Garamond), sans body (Jost).
+   Kota stone palette. Serif headings (Newsreader), sans body (Jost).
    ========================================================================== */
 
 :root {
@@ -13,7 +13,7 @@
   --accent: #2F5D50;
   --accent-soft: #9DB8AC;
 
-  --serif: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --serif: "Newsreader", Georgia, "Times New Roman", serif;
   --sans: "Jost", "Century Gothic", "Futura", "Helvetica Neue", Arial, sans-serif;
 
   --gutter: clamp(16px, 4vw, 56px);

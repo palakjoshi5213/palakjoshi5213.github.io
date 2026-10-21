@@ -189,13 +189,13 @@
     $$("[data-preview]").forEach(function (row) {
       row.addEventListener("mouseenter", function (e) {
         img.src = row.dataset.preview;
-        tx = px = e.clientX + 28; ty = py = e.clientY - 120;
+        tx = px = window.innerWidth - preview.offsetWidth - 32; ty = py = e.clientY - 120;
         preview.classList.add("is-visible");
         if (!moving) { moving = true; follow(); }
       });
       row.addEventListener("mousemove", function (e) {
-        var w = preview.offsetWidth;
-        tx = e.clientX + 28 + w > window.innerWidth ? e.clientX - w - 28 : e.clientX + 28;
+        // pinned to the right edge so it never covers the row being read; follows the cursor vertically
+        tx = window.innerWidth - preview.offsetWidth - 32;
         ty = Math.min(Math.max(12, e.clientY - preview.offsetHeight / 2), window.innerHeight - preview.offsetHeight - 12);
       });
       row.addEventListener("mouseleave", function () { preview.classList.remove("is-visible"); moving = false; });

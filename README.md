@@ -8,7 +8,7 @@ A static, multi-page website: plain HTML, CSS and JavaScript, with no build step
 index.html            Landing page: her name only; clicking it enters the site
 home.html             Home (slideshow)
 work.html             Project index (list / grid, filters, hover previews)
-themes.html           Three themes with short essays
+themes.html           Five themes, text only (no projects named, no images)
 documentation.html    Field documentation
 art.html              Atelier: drawings, paintings, studies and handmade models
 about.html            Profile, portrait, education, skills, contact (#contact)
@@ -30,6 +30,14 @@ Every page loads `style.css?v=…` and `main.js?v=…`. Change that number on al
 ```
 V=$(date +%Y%m%d%H%M); sed -i -E "s#(style\.css|main\.js)\?v=[0-9]+#\1?v=$V#g" *.html projects/*.html
 ```
+
+## Clean addresses
+
+Links omit ".html" (for example `/work`, `/projects/haven`). GitHub Pages serves `work.html` at `/work` automatically. Keep new links in the same form, and use the same form in `sitemap.xml` and canonical URLs.
+
+## Themes and articles
+
+`themes.html` holds five short essays about the threads running through her work. They are deliberately text only and name no specific projects. Her own articles can be added later as a separate section; add it to the menu only when the first article is published, so the site never shows an empty page.
 
 ## Replacing images
 

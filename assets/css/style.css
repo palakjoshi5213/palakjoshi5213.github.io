@@ -315,6 +315,7 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
 .index-table tbody tr:hover { background: var(--paper-deep); }
 .index-table tbody tr:hover .title a { color: var(--accent); }
 .index-table td.meta > span { color: var(--ink-soft); font-size: 14.5px; }
+.index-table td.meta:last-child > span { white-space: nowrap; }
 .index-table [hidden] { display: none; }
 
 @media (max-width: 760px) {
@@ -449,6 +450,10 @@ blockquote.pull cite { display: block; margin-top: 14px; font-family: var(--sans
 .theme { padding-bottom: clamp(56px, 8vw, 112px); scroll-margin-top: calc(var(--header-h) + 24px); }
 .theme + .theme { padding-top: clamp(40px, 6vw, 72px); border-top: 1px solid var(--rule); }
 .theme .h2 { margin: 10px 0 24px; }
+.theme__title {
+  margin: 12px 0 28px; font-family: var(--serif); font-weight: 300; color: var(--accent);
+  font-size: clamp(40px, 6vw, 84px); line-height: 1; letter-spacing: -.012em;
+}
 .theme .prose { font-size: 17px; }
 .theme-projects { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); margin-top: 32px; }
 .theme-projects a { text-decoration: none; font-size: 14px; }

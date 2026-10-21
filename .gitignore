@@ -4,3 +4,11 @@ Thumbs.db
 # original photos (full size, kept local)
 IMG*.jpeg
 IMG*.jpg
+
+# raw source files (kept local; backed up privately)
+*.rar
+*.zip
+/*.pdf
+
+# private files: kept locally and in the private backup only
+_private/

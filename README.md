@@ -5,7 +5,8 @@ A static, multi-page website: plain HTML, CSS and JavaScript, with no build step
 ## Structure
 
 ```
-index.html            Home (slideshow)
+index.html            Landing page: her name only; clicking it enters the site
+home.html             Home (slideshow)
 work.html             Project index (list / grid, filters, hover previews)
 themes.html           Three themes with short essays
 documentation.html    Field documentation
@@ -19,8 +20,8 @@ projects/*.html       One page per project
 assets/css/style.css  All styling (colours are the variables at the top)
 assets/js/main.js     Slideshow, filters, lightbox, mobile menu
 assets/img/<project>/ Images, one folder per project
-assets/docs/          Downloadable CV (PDF)
 _source/              Working files, not published (cv.html is the source of the CV PDF)
+_private/             Local only, ignored by git (CV PDF); included in the private backup
 ```
 
 ## After editing the CSS or JavaScript
@@ -83,6 +84,6 @@ git push --force backup "$C:refs/heads/main"
 
 The snapshot commit is never added to a local branch, so the private files cannot end up in the public repository by accident.
 
-## Updating the CV
+## The CV (private)
 
-Edit `_source/cv.html`, open it in a browser, print to PDF (A4, no margins, background graphics on), and save it over `assets/docs/Palak-Joshi-CV.pdf`.
+The CV is deliberately not on the website. Its source is `_source/cv.html`; the PDF lives in `_private/Palak-Joshi-CV.pdf`, which git ignores, so it never reaches the public repository (it is included in the private backup). To update it, edit `_source/cv.html`, open it in a browser, print to PDF (A4, no margins, background graphics on) and save it over `_private/Palak-Joshi-CV.pdf`. Send it directly to people who ask for it.

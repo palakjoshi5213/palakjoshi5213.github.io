@@ -39,6 +39,14 @@ Links omit ".html" (for example `/work`, `/projects/haven`). GitHub Pages serves
 
 `themes.html` holds five short essays about the threads running through her work. They are deliberately text only and name no specific projects. Her own articles can be added later as a separate section; add it to the menu only when the first article is published, so the site never shows an empty page.
 
+## WebP images
+
+Every image has a `.webp` copy next to the `.jpg` (about 38% smaller). Pages use `<picture>` so browsers load the WebP and fall back to the JPG. When you add or replace a JPG, create its WebP too: any online JPG-to-WebP converter at quality 80 works, saved with the same name and the `.webp` extension. Keep `og-image.jpg` as JPG, since some social sites ignore WebP previews.
+
+## Redirects
+
+GitHub Pages cannot send server 301 redirects for single pages. Removed pages are replaced by a small forwarding page (see `projects/working-drawings.html`) with `noindex`, a canonical tag and an instant redirect, which search engines treat as a permanent move.
+
 ## Replacing images
 
 Images are currently cropped from the PDF portfolio. To swap in originals, save the new file over the old one with the **same name** (for example `assets/img/haven/hero.jpg`). Export JPGs at about 2000 px on the long side, quality 80 to 85, so pages stay fast. If the proportions change, update the `width` and `height` on that `<img>` tag.

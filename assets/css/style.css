@@ -575,3 +575,6 @@ blockquote.pull cite { display: block; margin-top: 14px; font-family: var(--sans
   .site-header, .site-footer, .lightbox, .project-nav, .slide-controls { display: none !important; }
   body { background: #fff; }
 }
+
+/* <picture> wrappers add WebP without changing layout */
+picture { display: contents; }

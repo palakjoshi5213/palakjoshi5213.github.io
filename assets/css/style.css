@@ -199,21 +199,58 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
 /* ---------- Landing (index.html): name and section links only ---------- */
 
 .splash { min-height: 100svh; display: grid; place-items: center; }
-.splash__main { text-align: center; padding: var(--gutter); animation: splash-in 1.4s var(--ease) both; }
+.splash__main { text-align: center; padding: var(--gutter); }
 .splash__name {
   margin: 0; font-family: var(--sans); font-weight: 500; line-height: 1;
-  font-size: clamp(15px, 1.5vw, 18px); letter-spacing: .34em; text-transform: uppercase;
+  font-size: clamp(15px, 1.5vw, 18px); text-transform: uppercase;
 }
-.splash__name a { color: var(--ink); text-decoration: none; padding: 6px 0 6px .34em; border-bottom: 1px solid transparent; transition: border-color .5s var(--ease), color .5s var(--ease); }
-.splash__name a:hover, .splash__name a:focus-visible { border-bottom-color: var(--accent); color: var(--accent); outline: none; }
+.splash__name a { position: relative; display: inline-block; color: var(--ink); text-decoration: none; padding: 8px 0 12px; }
+.splash__name a:focus-visible { outline: none; }
+.splash__letters { display: inline-flex; }
+.splash__letters span {
+  display: inline-block; margin: 0 .17em;
+  opacity: 0; transform: translateY(10px);
+  animation: splash-letter .9s var(--ease) calc(.15s + var(--i) * 55ms) forwards;
+  transition: transform .5s var(--ease), margin .6s var(--ease), color .5s var(--ease);
+}
+.splash__gap { width: .5em; }
+/* hairline that draws out from the centre */
+.splash__name a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: var(--accent); transform: scaleX(0); transform-origin: center;
+  transition: transform .7s var(--ease);
+}
+.splash__name a:hover::after, .splash__name a:focus-visible::after { transform: scaleX(1); }
+/* letters ripple up, spread slightly and take the accent colour */
+.splash__name a:hover .splash__letters span:not(.splash__gap),
+.splash__name a:focus-visible .splash__letters span:not(.splash__gap) {
+  transform: translateY(-3px); margin: 0 .26em; color: var(--accent);
+  transition-delay: calc(var(--i) * 28ms);
+}
+
 .splash__nav {
   margin-top: 26px; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px;
   font-size: 11px; letter-spacing: .22em; text-transform: uppercase; line-height: 2;
+  opacity: 0; animation: splash-in 1.2s var(--ease) .9s forwards;
 }
-.splash__nav a { color: var(--ink-soft); text-decoration: none; }
-.splash__nav a:hover, .splash__nav a:focus-visible { color: var(--accent); }
-.splash__nav span { color: var(--muted); }
+.splash__nav a { position: relative; color: var(--ink-soft); text-decoration: none; transition: color .4s var(--ease), opacity .4s var(--ease); }
+.splash__nav a::after {
+  content: ""; position: absolute; left: 0; right: .22em; bottom: -2px; height: 1px;
+  background: currentColor; transform: scaleX(0); transform-origin: left;
+  transition: transform .45s var(--ease);
+}
+.splash__nav a:hover, .splash__nav a:focus-visible { color: var(--accent); outline: none; }
+.splash__nav a:hover::after, .splash__nav a:focus-visible::after { transform: scaleX(1); }
+/* the item you point at stands out; the rest step back */
+.splash__nav:hover a:not(:hover) { opacity: .4; }
+.splash__nav span { color: var(--muted); transition: opacity .4s var(--ease); }
+.splash__nav:hover span { opacity: .4; }
+
+@keyframes splash-letter { to { opacity: 1; transform: none; } }
 @keyframes splash-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .splash__letters span, .splash__nav { opacity: 1; transform: none; animation: none; }
+}
 
 /* ---------- Home slideshow ---------- */
 

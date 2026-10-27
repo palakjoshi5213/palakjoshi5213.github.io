@@ -335,22 +335,30 @@
   if (form) {
     var status = form.querySelector(".contact__status");
     var send = form.querySelector(".contact__send");
-    var say = function (msg, isError) { status.textContent = msg; status.classList.toggle("is-error", !!isError); };
-    if (/[?&]sent=1/.test(window.location.search)) say("Thank you. Your message has been sent.");
+    var fallback = " You can also email palakjoshi5213@gmail.com directly.";
+    var say = function (msg, kind) {
+      status.textContent = msg;
+      status.className = "contact__status" + (kind ? " is-" + kind : "");
+      if (msg) status.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    };
+    if (/[?&]sent=1/.test(window.location.search)) say("Thank you. Your message has been sent.", "ok");
     form.addEventListener("submit", function (e) {
       if (!window.fetch || !window.FormData) return;
       e.preventDefault();
       if (form.elements._honey.value) return;
-      send.disabled = true; say("Sending…");
+      send.disabled = true; send.textContent = "Sending…"; say("");
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var timer = setTimeout(function () { if (ctrl) ctrl.abort(); }, 20000);
       fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
-        method: "POST", headers: { Accept: "application/json" }, body: new FormData(form)
-      }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        method: "POST", headers: { Accept: "application/json" }, body: new FormData(form), signal: ctrl ? ctrl.signal : undefined
+      }).then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { ok: r.ok, d: d }; }); })
         .then(function (res) {
-          if (res.ok && String(res.d.success) === "true") { form.reset(); say("Thank you. Your message has been sent."); }
-          else { say("Sorry, that didn't go through. Please email palakjoshi5213@gmail.com instead.", true); }
+          if (res.ok && String(res.d.success) === "true") { form.reset(); say("Thank you. Your message has been sent.", "ok"); }
+          else if (/activat/i.test(res.d.message || "")) { say("Thanks. This form is being set up and your message could not be delivered yet." + fallback, "error"); }
+          else { say("Sorry, your message could not be sent" + (res.d.message ? " (" + res.d.message + ")." : ".") + fallback, "error"); }
         })
-        .catch(function () { say("Sorry, that didn't go through. Please email palakjoshi5213@gmail.com instead.", true); })
-        .then(function () { send.disabled = false; });
+        .catch(function () { say("Sorry, your message could not be sent. Please check your connection and try again." + fallback, "error"); })
+        .then(function () { clearTimeout(timer); send.disabled = false; send.textContent = "Send"; });
     });
   }
 

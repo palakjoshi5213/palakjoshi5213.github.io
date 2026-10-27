@@ -336,12 +336,23 @@
     var status = form.querySelector(".contact__status");
     var send = form.querySelector(".contact__send");
     var fallback = " You can also email palakjoshi5213@gmail.com directly.";
-    var say = function (msg, kind) {
+    var say = function (msg, kind, stay) {
       status.textContent = msg;
       status.className = "contact__status" + (kind ? " is-" + kind : "");
-      if (msg) status.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      if (msg && !stay) status.scrollIntoView({ block: "nearest", behavior: "smooth" });
     };
     if (/[?&]sent=1/.test(window.location.search)) say("Thank you. Your message has been sent.", "ok");
+    // when the browser blocks sending (e.g. email missing or mistyped), say so plainly
+    form.addEventListener("invalid", function (e) {
+      var el = e.target;
+      el.classList.add("is-invalid");
+      if (el.name === "email") {
+        say(el.validity.valueMissing ? "Please enter your email address so Palak can reply." : "Please check your email address, it doesn't look complete (for example name@gmail.com).", "error", true);
+      }
+    }, true);
+    form.addEventListener("input", function (e) {
+      if (e.target.classList.contains("is-invalid") && e.target.validity.valid) { e.target.classList.remove("is-invalid"); say(""); }
+    });
     form.addEventListener("submit", function (e) {
       if (!window.fetch || !window.FormData) return;
       e.preventDefault();

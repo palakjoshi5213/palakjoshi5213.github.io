@@ -617,3 +617,6 @@ picture { display: contents; }
 .contact__status.is-ok { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent-soft) 22%, transparent); }
 .contact__status.is-error { color: #8A3324; border-color: #8A3324; background: color-mix(in srgb, #E8C9C0 35%, transparent); }
 .contact__trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+/* keep fields clear of the sticky header when the browser scrolls to them (e.g. validation) */
+input, textarea, select { scroll-margin-top: calc(var(--header-h) + 64px); }
+.field input:user-invalid, .field input.is-invalid { border-color: #8A3324; }

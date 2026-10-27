@@ -330,6 +330,30 @@
     }
   }
 
+  /* ---------- Contact form (FormSubmit; falls back to a normal POST without JS) ---------- */
+  var form = document.getElementById("contact-form");
+  if (form) {
+    var status = form.querySelector(".contact__status");
+    var send = form.querySelector(".contact__send");
+    var say = function (msg, isError) { status.textContent = msg; status.classList.toggle("is-error", !!isError); };
+    if (/[?&]sent=1/.test(window.location.search)) say("Thank you. Your message has been sent.");
+    form.addEventListener("submit", function (e) {
+      if (!window.fetch || !window.FormData) return;
+      e.preventDefault();
+      if (form.elements._honey.value) return;
+      send.disabled = true; say("Sending…");
+      fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
+        method: "POST", headers: { Accept: "application/json" }, body: new FormData(form)
+      }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          if (res.ok && String(res.d.success) === "true") { form.reset(); say("Thank you. Your message has been sent."); }
+          else { say("Sorry, that didn't go through. Please email palakjoshi5213@gmail.com instead.", true); }
+        })
+        .catch(function () { say("Sorry, that didn't go through. Please email palakjoshi5213@gmail.com instead.", true); })
+        .then(function () { send.disabled = false; });
+    });
+  }
+
   /* ---------- Footer year ---------- */
   $$("[data-year]").forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

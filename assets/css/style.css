@@ -117,17 +117,12 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 0; }
 .brand:hover { color: var(--ink); }
 .brand__mark {
   position: relative; width: 46px; height: 46px; flex: none;
-  display: grid; place-items: center; padding-bottom: 4px;
+  display: grid; place-items: center;
   border: 1px solid var(--ink);
-  font-family: var(--serif); font-size: 21px; font-weight: 500; letter-spacing: .06em;
+  font-family: var(--sans); font-size: 17px; font-weight: 700; letter-spacing: .08em; padding-left: .08em;
   transition: background .45s var(--ease), color .45s var(--ease);
 }
-.brand__mark::after {
-  content: ""; position: absolute; left: 50%; bottom: 8px; width: 18px; height: 1.5px;
-  background: var(--accent); transform: translateX(-50%); transition: width .45s var(--ease), background .45s;
-}
 .brand:hover .brand__mark, .brand:focus-visible .brand__mark { background: var(--ink); color: var(--paper); }
-.brand:hover .brand__mark::after, .brand:focus-visible .brand__mark::after { background: var(--accent-soft); width: 24px; }
 .brand__name {
   font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); white-space: nowrap;
   opacity: 0; transform: translateX(-8px); transition: opacity .45s var(--ease), transform .45s var(--ease);
@@ -578,3 +573,44 @@ blockquote.pull cite { display: block; margin-top: 14px; font-family: var(--sans
 
 /* <picture> wrappers add WebP without changing layout */
 picture { display: contents; }
+
+/* ---------- Contact page: details left, form right ---------- */
+
+.contact {
+  display: grid; gap: clamp(40px, 6vw, 96px); grid-template-columns: minmax(0, 1fr);
+  padding-top: clamp(40px, 6vw, 88px); padding-bottom: clamp(56px, 8vw, 112px);
+}
+@media (min-width: 900px) { .contact { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); } }
+.contact__name { margin: 0 0 22px; font-family: var(--serif); font-size: clamp(26px, 2.6vw, 34px); line-height: 1.1; }
+.contact__lines { margin: 0 0 26px; font-size: 16px; line-height: 1.8; color: var(--ink-soft); }
+.contact__lines a { text-decoration: none; color: var(--ink); }
+.contact__lines a:hover { color: var(--accent); }
+.contact__social { margin: 6px 0 0; display: flex; gap: 12px; }
+.social {
+  width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--ink); color: var(--paper); transition: background .3s var(--ease);
+}
+.social:hover, .social:focus-visible { background: var(--accent); color: var(--paper); }
+.social svg { width: 22px; height: 22px; }
+.contact__title { margin: 0 0 26px; font-family: var(--serif); font-weight: 400; font-size: clamp(24px, 2.4vw, 32px); line-height: 1.2; }
+.field-row { display: grid; gap: 0 24px; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 600px) { .field-row { grid-template-columns: 1fr 1fr; } }
+.field { display: block; margin-bottom: 18px; }
+.field span { display: block; font-size: 13px; color: var(--ink-soft); margin-bottom: 6px; }
+.field input, .field textarea {
+  width: 100%; font: inherit; font-size: 16px; color: var(--ink);
+  background: transparent; border: 1px solid var(--ink); border-radius: 0; padding: 10px 12px;
+  transition: border-color .25s, background .25s;
+}
+.field textarea { resize: vertical; min-height: 120px; }
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); background: color-mix(in srgb, var(--paper-deep) 60%, transparent); }
+.contact__send {
+  width: 100%; margin-top: 4px; padding: 12px 16px; font: inherit; font-size: 15px; letter-spacing: .04em;
+  background: transparent; color: var(--ink); border: 1px solid var(--ink); cursor: pointer;
+  transition: background .3s var(--ease), color .3s var(--ease);
+}
+.contact__send:hover, .contact__send:focus-visible { background: var(--ink); color: var(--paper); }
+.contact__send:disabled { opacity: .6; cursor: wait; }
+.contact__status { min-height: 1.6em; margin: 14px 0 0; font-size: 14px; color: var(--accent); }
+.contact__status.is-error { color: #9A3B2E; }
+.contact__trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
